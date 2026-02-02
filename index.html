@@ -40,7 +40,7 @@
       max-width: 380px;
       width: 90%;
       z-index: 2;
-      animation: fadeIn 1s ease;
+      animation: fadeIn 0.8s ease;
     }
 
     @keyframes fadeIn {
@@ -48,14 +48,8 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    h1 {
-      color: #ff7aa2;
-      margin-bottom: 10px;
-    }
-
-    p {
-      color: #ddd;
-    }
+    h1 { color: #ff7aa2; }
+    p { color: #ddd; }
 
     input {
       padding: 14px;
@@ -63,8 +57,8 @@
       border-radius: 14px;
       border: none;
       margin-top: 14px;
-      outline: none;
       font-size: 15px;
+      outline: none;
     }
 
     button {
@@ -84,9 +78,7 @@
       box-shadow: 0 0 20px rgba(255,100,150,0.8);
     }
 
-    .hidden {
-      display: none;
-    }
+    .hidden { display: none; }
 
     /* Page 2 */
     .page2 {
@@ -113,7 +105,7 @@
       position: fixed;
       inset: 0;
       background: rgba(0,0,0,0.75);
-      display: flex;
+      display: none; /* FORCE HIDDEN */
       justify-content: center;
       align-items: center;
       z-index: 5;
@@ -126,7 +118,7 @@
       border-radius: 26px;
       text-align: center;
       max-width: 340px;
-      animation: pop 0.5s ease;
+      animation: pop 0.45s ease;
     }
 
     @keyframes pop {
@@ -134,10 +126,7 @@
       to { transform: scale(1); opacity: 1; }
     }
 
-    .popup-content h1 {
-      color: #ff4d6d;
-    }
-
+    .popup-content h1 { color: #ff4d6d; }
   </style>
 </head>
 <body>
@@ -156,14 +145,12 @@
   <div class="card hidden page2" id="page2">
     <h1>Hi Dilusha 💕</h1>
     <p>This is me… in my anime universe 🌸</p>
-
     <img class="character" src="anime-me.png" alt="Anime Me" />
-
     <button onclick="showPopup()">Continue ✨</button>
   </div>
 
   <!-- POPUP QUESTION -->
-  <div class="popup hidden" id="popup">
+  <div class="popup" id="popup">
     <div class="popup-content">
       <h1>Dilusha 💖</h1>
       <p>Will you be my Valentine?</p>
@@ -185,7 +172,7 @@
     }
 
     function showPopup() {
-      document.getElementById('popup').classList.remove('hidden');
+      document.getElementById('popup').style.display = 'flex';
     }
 
     function yesClicked() {
