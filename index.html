@@ -1,277 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>💖 Valentine Quest for Dilusha 💖</title>
-
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      font-family: 'Poppins', sans-serif;
-      background: radial-gradient(circle at top, #0f2027, #203a43, #2c5364);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-      color: white;
-    }
-
-    .energy {
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle, rgba(255,255,255,0.08), transparent 60%);
-      animation: pulse 4s infinite alternate;
-      z-index: 0;
-    }
-
-    @keyframes pulse {
-      from { opacity: 0.4; }
-      to { opacity: 0.9; }
-    }
-
-    .card {
-      background: rgba(0,0,0,0.75);
-      padding: 32px;
-      border-radius: 24px;
-      box-shadow: 0 30px 60px rgba(0,0,0,0.6);
-      text-align: center;
-      max-width: 380px;
-      width: 90%;
-      z-index: 2;
-      animation: fadeIn 0.8s ease;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    h1 { color: #ff7aa2; }
-    p { color: #ddd; }
-
-    input {
-      padding: 14px;
-      width: 100%;
-      border-radius: 14px;
-      border: none;
-      margin-top: 14px;
-      font-size: 15px;
-      outline: none;
-    }
-
-    button {
-      margin-top: 20px;
-      padding: 14px 30px;
-      border: none;
-      border-radius: 30px;
-      background: linear-gradient(135deg, #ff4d6d, #ff9a9e);
-      color: white;
-      font-size: 16px;
-      cursor: pointer;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    button:hover {
-      transform: scale(1.07);
-      box-shadow: 0 0 20px rgba(255,100,150,0.8);
-    }
-
-    .hidden { display: none; }
-
-    /* Page 2 */
-    .page2 {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 18px;
-    }
-
-    .character {
-      width: 220px;
-      border-radius: 20px;
-      box-shadow: 0 0 30px rgba(255,200,200,0.4);
-      animation: float 3s ease-in-out infinite;
-    }
-
-    @keyframes float {
-      0%,100% { transform: translateY(0); }
-      50% { transform: translateY(-12px); }
-    }
-
-    /* Popup */
-    .popup {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.75);
-      display: none; /* FORCE HIDDEN */
-      justify-content: center;
-      align-items: center;
-      z-index: 5;
-    }
-
-    .popup-content {
-      background: white;
-      color: #333;
-      padding: 30px;
-      border-radius: 26px;
-      text-align: center;
-      max-width: 340px;
-      animation: pop 0.45s ease;
-    }
-
-    @keyframes pop {
-      from { transform: scale(0.6); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
-    }
-
-    .popup-content h1 { color: #ff4d6d; }
-
-    /* Fireworks canvas */
-    #fireworksCanvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      pointer-events: none;
-      z-index: 10;
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>💖 Valentine Quest for Dilusha 💖</title>
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    font-family: 'Poppins', sans-serif;
+    background: radial-gradient(circle at top, #0f2027, #203a43, #2c5364);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    color: white;
+  }
+  .energy {position: absolute; inset:0; background: radial-gradient(circle, rgba(255,255,255,0.08), transparent 60%); animation: pulse 4s infinite alternate; z-index: 0;}
+  @keyframes pulse {from {opacity:0.4;} to {opacity:0.9;}}
+  .card {background: rgba(0,0,0,0.75); padding:32px; border-radius:24px; box-shadow:0 30px 60px rgba(0,0,0,0.6); text-align:center; max-width:380px; width:90%; z-index:2; animation: fadeIn 0.8s ease;}
+  @keyframes fadeIn {from{opacity:0; transform:translateY(20px);} to{opacity:1; transform:translateY(0);}}
+  h1{color:#ff7aa2;} p{color:#ddd;}
+  input{padding:14px; width:100%; border-radius:14px; border:none; margin-top:14px; font-size:15px; outline:none;}
+  button{margin-top:20px; padding:14px 30px; border:none; border-radius:30px; background: linear-gradient(135deg,#ff4d6d,#ff9a9e); color:white; font-size:16px; cursor:pointer; transition: transform 0.2s ease, box-shadow 0.2s ease;}
+  button:hover {transform: scale(1.07); box-shadow:0 0 20px rgba(255,100,150,0.8);}
+  .hidden {display:none;}
+  .page2 {display:flex; flex-direction:column; align-items:center; gap:18px;}
+  .character {width:220px; border-radius:20px; box-shadow:0 0 30px rgba(255,200,200,0.4); animation: float 3s ease-in-out infinite;}
+  @keyframes float {0%,100%{transform:translateY(0);}50%{transform:translateY(-12px);}}
+  .popup {position: fixed; inset:0; background:rgba(0,0,0,0.75); display:none; justify-content:center; align-items:center; z-index:5;}
+  .popup-content {background:white; color:#333; padding:30px; border-radius:26px; text-align:center; max-width:340px; animation: pop 0.45s ease;}
+  @keyframes pop {from {transform:scale(0.6);opacity:0;} to{transform:scale(1);opacity:1;}}
+  .popup-content h1{color:#ff4d6d;}
+  #fireworksCanvas {position: fixed; top:0; left:0; width:100vw; height:100vh; pointer-events:none; z-index:10;}
+</style>
 </head>
 <body>
 
-  <div class="energy"></div>
-  <canvas id="fireworksCanvas"></canvas>
+<div class="energy"></div>
+<canvas id="fireworksCanvas"></canvas>
 
-  <!-- PAGE 1: PASSWORD -->
-  <div class="card" id="page1">
-    <h1>🔒 Secret Quest 🔒</h1>
-    <p>Hint: the first event name we first met 😉</p>
-    <input type="password" id="password" placeholder="Enter the secret word" />
-    <button onclick="unlock()">Unlock 💖</button>
+<!-- PAGE 1 -->
+<div class="card" id="page1">
+  <h1>🔒 Secret Quest 🔒</h1>
+  <p>Hint: the first event name we first met 😉</p>
+  <input type="password" id="password" placeholder="Enter the secret word" />
+  <button onclick="unlock()">Unlock 💖</button>
+</div>
+
+<!-- PAGE 2 -->
+<div class="card hidden page2" id="page2">
+  <h1>Hi Dilusha 💕</h1>
+  <p>This is me… in my anime universe 🌸</p>
+  <img class="character" src="anime-me.png" alt="Anime Me" />
+  <button onclick="showPopup()">Continue ✨</button>
+</div>
+
+<!-- POPUP -->
+<div class="popup" id="popup">
+  <div class="popup-content">
+    <h1>Dilusha 💖</h1>
+    <p>Will you be my Valentine?</p>
+    <button id="valentineBtn" onclick="yesClicked()">YES 😍🔥</button>
   </div>
+</div>
 
-  <!-- PAGE 2: SURPRISE -->
-  <div class="card hidden page2" id="page2">
-    <h1>Hi Dilusha 💕</h1>
-    <p>This is me… in my anime universe 🌸</p>
-    <img class="character" src="anime-me.png" alt="Anime Me" />
-    <button id="yesButton" onclick="yesClicked()">Continue ✨</button>
-  </div>
+<script>
+const SECRET = "omg";
 
-  <!-- POPUP QUESTION -->
-  <div class="popup" id="popup">
-    <div class="popup-content">
-      <h1>Dilusha 💖</h1>
-      <p>Will you be my Valentine?</p>
-      <button id="valentineBtn" onclick="yesClicked()">YES 😍🔥</button>
-    </div>
-  </div>
+function unlock() {
+  const input = document.getElementById('password').value.toLowerCase();
+  if(input === SECRET){
+    document.getElementById('page1').classList.add('hidden');
+    document.getElementById('page2').classList.remove('hidden');
+  } else {
+    alert('Wrong answer 😜 Try again!');
+  }
+}
 
-  <script>
-    const SECRET = "omg";
+function showPopup() {
+  document.getElementById('popup').style.display = 'flex';
+}
 
-    function unlock() {
-      const input = document.getElementById('password').value.toLowerCase();
-      if (input === SECRET) {
-        document.getElementById('page1').classList.add('hidden');
-        document.getElementById('page2').classList.remove('hidden');
-      } else {
-        alert('Wrong answer 😜 Try again!');
-      }
+// FIREWORKS CODE
+function yesClicked() {
+  document.getElementById('popup').style.display = 'none';
+  const canvas = document.getElementById('fireworksCanvas');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  const fireworks = [];
+
+  class Particle {
+    constructor(x,y){
+      this.x = x;
+      this.y = y;
+      const angle = Math.random()*2*Math.PI;
+      const speed = Math.random()*6+2;
+      this.vx = Math.cos(angle)*speed;
+      this.vy = Math.sin(angle)*speed;
+      this.alpha = 1;
+      this.color = `hsl(${Math.random()*360},100%,50%)`;
     }
+    update() { this.x+=this.vx; this.y+=this.vy; this.alpha-=0.02; }
+    draw() { ctx.globalAlpha = this.alpha; ctx.fillStyle=this.color; ctx.beginPath(); ctx.arc(this.x,this.y,3,0,Math.PI*2); ctx.fill(); ctx.globalAlpha=1; }
+  }
 
-    function showPopup() {
-      document.getElementById('popup').style.display = 'flex';
+  class Firework {
+    constructor(x,y){
+      this.sparks=[];
+      for(let i=0;i<30;i++){ this.sparks.push(new Particle(x,y)); }
     }
+    update(){ this.sparks.forEach(p=>p.update()); }
+    draw(){ this.sparks.forEach(p=>p.draw()); }
+    done(){ return this.sparks.every(p=>p.alpha<=0); }
+  }
 
-    function yesClicked() {
-      const popup = document.getElementById('popup');
-      popup.style.display = 'none';
+  function animate() {
+    ctx.fillStyle='rgba(0,0,0,0.2)';
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+    fireworks.forEach(f=>f.update());
+    fireworks.forEach(f=>f.draw());
+    for(let i=fireworks.length-1;i>=0;i--){ if(fireworks[i].done()) fireworks.splice(i,1); }
+    requestAnimationFrame(animate);
+  }
 
-      const canvas = document.getElementById('fireworksCanvas');
-      const ctx = canvas.getContext('2d');
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+  animate();
 
-      const fireworks = [];
-
-      class Particle {
-        constructor(x, y) {
-          this.x = x;
-          this.y = y;
-          this.vx = (Math.random() - 0.5) * 6;
-          this.vy = (Math.random() - 0.5) * 6;
-          this.alpha = 1;
-          this.color = `hsl(${Math.random()*360}, 100%, 50%)`;
-        }
-        update() {
-          this.x += this.vx;
-          this.y += this.vy;
-          this.alpha -= 0.02;
-        }
-        draw() {
-          ctx.globalAlpha = this.alpha;
-          ctx.fillStyle = this.color;
-          ctx.beginPath();
-          ctx.arc(this.x, this.y, 3, 0, Math.PI*2);
-          ctx.fill();
-          ctx.globalAlpha = 1;
-        }
-      }
-
-      class Firework {
-        constructor(x, y) {
-          this.sparks = [];
-          for (let i = 0; i < 30; i++) {
-            this.sparks.push(new Particle(x, y));
-          }
-        }
-        update() {
-          this.sparks.forEach(p => p.update());
-        }
-        draw() {
-          this.sparks.forEach(p => p.draw());
-        }
-        done() {
-          return this.sparks.every(p => p.alpha <= 0);
-        }
-      }
-
-      function launchFirework(x, y) {
-        fireworks.push(new Firework(x, y));
-      }
-
-      function animate() {
-        ctx.fillStyle = 'rgba(0,0,0,0.2)';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        fireworks.forEach(f => f.update());
-        fireworks.forEach(f => f.draw());
-        for (let i = fireworks.length-1; i >=0; i--) {
-          if (fireworks[i].done()) fireworks.splice(i,1);
-        }
-        requestAnimationFrame(animate);
-      }
-
-      animate();
-
-      // Launch fireworks from the button location
-      const btn = document.getElementById('valentineBtn');
-      const rect = btn.getBoundingClientRect();
-
-      let count = 0;
-      const interval = setInterval(() => {
-        const x = rect.left + rect.width / 2 + (Math.random()-0.5)*50;
-        const y = rect.top + rect.height / 2 + (Math.random()-0.5)*50;
-        launchFirework(x, y);
-        count++;
-        if(count > 25) clearInterval(interval); // total 25 bursts
-      }, 200);
-    }
-  </script>
+  // Launch fireworks from button
+  const btn = document.getElementById('valentineBtn');
+  const rect = btn.getBoundingClientRect();
+  let count=0;
+  const interval = setInterval(()=>{
+    const x = rect.left + rect.width/2;
+    const y = rect.top + rect.height/2;
+    fireworks.push(new Firework(x,y));
+    count++;
+    if(count>20) clearInterval(interval); // 20 bursts
+  },150);
+}
+</script>
 
 </body>
 </html>
-
